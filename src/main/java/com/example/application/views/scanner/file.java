@@ -5,13 +5,14 @@ import java.io.*;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import java.util.Scanner;
+import java.util.HashMap;
 
 class assignment {
     String day;
     String description;
     String month;
     Integer dayAsInt;
-    int monthAsInt;
+    Integer monthAsInt;
 }
 public class file {
 
@@ -133,42 +134,37 @@ public class file {
             listOfAssignments[min_idx] = listOfAssignments[i];
             listOfAssignments[i] = temp;
         }
-
+        
+        // Andy was here :) Remember your hashmaps!
+        HashMap<String, Integer> monthNumMap = new HashMap<>();
+        monthNumMap.put("january", 1);
+        monthNumMap.put("febuary", 2);
+        monthNumMap.put("march", 3);
+        monthNumMap.put("april", 4);
+        monthNumMap.put("may", 5);
+        monthNumMap.put("june", 6);
+        monthNumMap.put("july", 7);
+        monthNumMap.put("august", 8);
+        monthNumMap.put("september", 9);
+        monthNumMap.put("october", 10);
+        monthNumMap.put("november", 11);
+        monthNumMap.put("december", 12);
+        
         //format month----------------------------------------------------------------
         for (int i = 0; i < numOfAssignments; i++) {
-            if (listOfAssignments[i].month.equals("January")) {
-                listOfAssignments[i].monthAsInt = 1;
-            } else if (listOfAssignments[i].month.equals("February")) {
-                listOfAssignments[i].monthAsInt = 2;
-            } else if (listOfAssignments[i].month.equals("March")) {
-                listOfAssignments[i].monthAsInt = 3;
-            } else if (listOfAssignments[i].month.equals("April")) {
-                listOfAssignments[i].monthAsInt = 4;
-            } else if (listOfAssignments[i].month.equals("May")) {
-                listOfAssignments[i].monthAsInt = 5;
-            } else if (listOfAssignments[i].month.equals("June")) {
-                listOfAssignments[i].monthAsInt = 6;
-            } else if (listOfAssignments[i].month.equals("July")) {
-                listOfAssignments[i].monthAsInt = 7;
-            } else if (listOfAssignments[i].month.equals("August")) {
-                listOfAssignments[i].monthAsInt = 8;
-            } else if (listOfAssignments[i].month.equals("September")) {
-                listOfAssignments[i].monthAsInt = 9;
-            } else if (listOfAssignments[i].month.equals("October")) {
-                listOfAssignments[i].monthAsInt = 10;
-            } else if (listOfAssignments[i].month.equals("November")) {
-                listOfAssignments[i].monthAsInt = 11;
-            } else if (listOfAssignments[i].month.equals("December")) {
-                listOfAssignments[i].monthAsInt = 12;
-            } else {
-                listOfAssignments[i].monthAsInt = -1;
-            }
+          String month = listOfAssignments[i].month.toLowerCase();
+          if (monthNumMap.containsKey(month)) {
+            listOfAssignments[i].monthAsInt = monthNumMap.get(month);
+          } else {
+            listOfAssignments[i].monthAsInt = -1;
+          }
         }
 
         //sort by month---------------------------------------------------------------
         for (int i = 0; i < n; i++) {
             listOfAssignments[i].dayAsInt = convertToInt(listOfAssignments[i]);
         }
+
         int i, j;
         assignment temp;
         boolean swapped;
@@ -206,3 +202,4 @@ public class file {
         return listOfAssignments;
     }
 }
+
